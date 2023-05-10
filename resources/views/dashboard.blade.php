@@ -1,24 +1,32 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+<head>
+    <meta charset="utf-8">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Cars</h1>
     <div class="container">
         <div class="row">
             <div class="col-lg-10">
                 <p>Index</p>
+                <a href="" type="button" class="btn btn-primary">Veículos</a>
             </div>
             <div class="col-lg-2">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+                    <button type="submit" class="btn btn-primary">
                         {{ __('Log Out') }}
                     </button>
                 </form>
             </div>
         </div>
     </div>
-</x-app-layout>
+</body>
+</html>
