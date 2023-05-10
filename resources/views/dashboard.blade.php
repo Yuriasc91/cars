@@ -9,13 +9,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Cars</h1>
     <div class="container">
+        <h1>Cars</h1>
         <div class="row">
             <div class="col-lg-10">
-                <p>Index</p>
-                <a href="" type="button" class="btn btn-primary">Veículos</a>
+                <a href=" {{ route('cars.index') }} " type="button" class="btn btn-primary">Veículos</a>
             </div>
             <div class="col-lg-2">
                 <form method="POST" action="{{ route('logout') }}">
@@ -29,4 +29,5 @@
         </div>
     </div>
 </body>
+
 </html>
