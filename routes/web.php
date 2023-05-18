@@ -15,15 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/cars', [CarsController::class, 'index'])->name('cars.index');
-Route::get('/cars/create', [CarsController::class, 'create'])->name('cars.create');
-Route::post('/cars/store', [CarsController::class, 'store'])->name('cars.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cars', [CarsController::class, 'index'])->name('cars.index');
+    Route::get('/cars/create', [CarsController::class, 'create'])->name('cars.create');
+    Route::post('/cars/store', [CarsController::class, 'store'])->name('cars.store');
+    Route::get('/cars/show/{id}', [CarsController::class, 'show'])->name('cars.show');
+});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

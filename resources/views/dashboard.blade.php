@@ -14,15 +14,15 @@
     <div class="container">
         <h1>Cars</h1>
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 <a href=" {{ route('cars.index') }} " type="button" class="btn btn-primary">Veículos</a>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-6">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Log Out') }}
+                        {{ __('Sair') }}
                     </button>
                 </form>
             </div>

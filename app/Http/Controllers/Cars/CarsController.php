@@ -11,7 +11,7 @@ class CarsController extends Controller
 {
     public function index()
     {
-        $cars =  Cars::all();
+        $cars =  Cars::paginate(10);
         return view('cars.index', compact('cars'));
     }
 
@@ -22,25 +22,25 @@ class CarsController extends Controller
 
     public function store(Request $request)
     {
-        dd('Aqui');
-        // $validation  = $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'modelo' => ['required', 'string', 'email', 'max:255'],
-        //     'year' => ['required', 'string'],
-        //     'price' => ['required', 'string'],
-        // ]);
-
         try {
             $car = new Cars();
             $car->name = $request->input('name');
             $car->modelo = $request->input('modelo');
             $car->year = $request->input('year');
             $car->price = $request->input('price');
+            $car->user_id = 0;
             $car->save();
-            
-            return view('cars.index', compact('cars'));
+
+            return redirect()->route('cars.index')->with(['msg' => 'Cadastrado']);
         } catch (Exception $err) {
-            dd($err)->getMessage();
+            // dd($err)->getMessage();
+            return redirect()->route('cars.includes._form')->with(['msg' => 'Erro ao cadastrar']);
         }
+    }
+
+    public function show($id)
+    {
+        $car = Cars::findOrFail($id);
+        return view('cars.includes.show', compact('car'));
     }
 }

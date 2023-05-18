@@ -10,21 +10,27 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="container">
-    <div class="row">
-        @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+<body>
+    <div class="container">
+        <div class="row">
+            @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                    @else
+                        <div class="cols-lg-6">
+                            <a href="{{ route('login') }}">Log in</a>
+                        </div>
+                        @if (Route::has('register'))
+                            <div class="cols-lg-6">
+                                <a href="{{ route('register') }}">Register</a>
+                            </div>
+                        @endif
+                    @endauth
+                </div>
             @endif
-            @endauth
         </div>
-        @endif
     </div>
 </body>
 
