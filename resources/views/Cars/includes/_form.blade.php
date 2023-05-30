@@ -12,7 +12,8 @@
     @if ($errors->any())
         <h4>{{ $errors->first() }}</h4>
     @endif
-    <div class="container">
+    <div class="container" style="display: center;">
+        @include('layouts.nav')
         <h2>Cadastrar Veículo</h2>
         <div class="row">
             <div class="col-lg-4">

@@ -60,7 +60,7 @@
                             <div class="flex items-center justify-end mt-4">
                                 @if (Route::has('register'))
                                     <div class="cols-lg-6">
-                                        <a href="{{ route('register') }}">Register</a>
+                                        <a href="{{ route('register') }}">Registrar</a>
                                     </div>
                                 @endif
                             </div>

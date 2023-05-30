@@ -24,7 +24,7 @@
                         </div>
                         @if (Route::has('register'))
                             <div class="cols-lg-6">
-                                <a href="{{ route('register') }}">Register</a>
+                                <a href="{{ route('register') }}">Registrar</a>
                             </div>
                         @endif
                     @endauth

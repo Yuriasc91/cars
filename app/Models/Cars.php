@@ -12,12 +12,13 @@ class Cars extends Model
     protected $fillable = [
         'name',
         'modelo',
-        'user_id',
         'year',
+        'price',
+        'sell_id',
     ];
 
-    public function User()
+    public function Sell()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Sell::class, 'car_id', 'id');
     }
 }

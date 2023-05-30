@@ -22,7 +22,6 @@ class User extends Authenticatable
         'email',
         'password',
         'seller',
-        'cars_id'
     ];
 
     /**
@@ -44,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Cars()
+    public function Sell()
     {
-        $this->hasMany(Cars::class, 'cars_id');
+        return $this->belongsTo(Sell::class, 'user_id', 'id');
     }
 }

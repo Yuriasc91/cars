@@ -12,6 +12,23 @@
 
 <body class="container">
     @include('layouts.nav')
+    <form class="form-inline" method="POST" action="{{ route('cars.search') }}">
+        @csrf
+        <div class="row">
+            <div class="col-sm-6">
+                <input class="form-control" name="search" id="search" type="text"
+                    placeholder="Nome/Modelo/Ano/Preço">
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+    @if (session('msg'))
+        <div>
+            <p style="color: green">{{ session('msg') }}</p>
+        </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -20,37 +37,37 @@
                 <th scope="col">Modelo</th>
                 <th scope="col">Ano</th>
                 <th scope="col">Preço</th>
-                <th scope="col">user_id</th>
-                <th scope="col">Ações</th>
+                <th style="text-align: center;">Ações</th>
             </tr>
         </thead>
         <tbody>
-            @if (isset($cars))
-                @foreach ($cars as $car)
-                    <tr>
-                        <td>{{ $car['id'] }}</td>
-                        <td>{{ $car['name'] }}</td>
-                        <td>{{ $car['modelo'] }}</td>
-                        <td>{{ $car['price'] }}</td>
-                        <td>{{ $car['year'] }}</td>
-                        <td>{{ $car['user_id'] }}</td>
-                        <td>
-                            <a href="{{ route('cars.show', $car['id']) }}" class="btn btn-outline-primary">Ver</a>
-                            @if ($car->user_id == 1)
-                                <a class="btn btn-outline-warning">Editar</a>
-                                <a class="btn btn-outline-danger">Apagar</a>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-            @else
+            @foreach ($cars as $key => $value)
                 <tr>
-                    <td>Nenhum resultado encontrado</td>
+                    <td>{{ $value->Car[0]->id }}</td>
+                    <td>{{ $value->Car[0]->name }}</td>
+                    <td>{{ $value->Car[0]->modelo }}</td>
+                    <td>{{ $value->Car[0]->year }}</td>
+                    <td>{{ $value->Car[0]->price }}</td>
+                    <td style="text-align: center;">
+                        @if ( isset($value->Users[0]->id) && $value->Users[0]->id == $user)
+                            <a href="{{ route('cars.show', $value->Car[0]->id) }}"
+                                class="btn btn-outline-primary">Ver</a>
+                        @else
+                            <a href="{{ route('cars.show', $value->Car[0]->id) }}"
+                                class="btn btn-outline-primary">Ver</a>
+                            <a href="{{ route('sell.index', $value->Car[0]->id) }}"
+                                class="btn btn-outline-success">Comprar</a>
+                        @endif
+                    </td>
                 </tr>
-            @endif
+            @endforeach
         </tbody>
     </table>
-    {{ $cars->links('pagination::bootstrap-4') }}
+    {{-- @if (isset($filters))
+        {{ $cars->appends($filters)->links('pagination::bootstrap-4') }}
+    @else
+        {{ $cars->links('pagination::bootstrap-4') }}
+    @endif --}}
 </body>
 
 </html>
